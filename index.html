@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mgo — Алматы</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#080808;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+    overflow-x:hidden;
+}
+
+/* ===== LANGUAGE ===== */
+
+.language{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:#080808;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.language-box{
+    width:100%;
+    max-width:400px;
+    background:#111;
+    border:1px solid #292929;
+    border-radius:28px;
+    padding:45px 25px;
+    text-align:center;
+    box-shadow:0 30px 100px #000;
+}
+
+.language-logo{
+    font-size:65px;
+    font-weight:900;
+    letter-spacing:-7px;
+    margin-bottom:25px;
+}
+
+.yellow{
+    color:#ffd400;
+}
+
+.language-box h1{
+    font-size:27px;
+    margin-bottom:8px;
+}
+
+.language-box p{
+    color:#777;
+    margin-bottom:30px;
+}
+
+.language-buttons{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.language-buttons button{
+    width:100%;
+    padding:17px;
+    border:0;
+    border-radius:15px;
+    background:#ffd400;
+    color:#000;
+    font-size:17px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.language-buttons button:last-child{
+    background:#242424;
+    color:#fff;
+}
+
+/* ===== SITE ===== */
+
+#site{
+    display:none;
+}
+
+/* ===== HEADER ===== */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:1000;
+    background:rgba(8,8,8,.9);
+    border-bottom:1px solid #222;
+    backdrop-filter:blur(15px);
+}
+
+.nav{
+    width:92%;
+    max-width:1200px;
+    height:75px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    color:white;
+    text-decoration:none;
+    font-size:40px;
+    font-weight:900;
+    letter-spacing:-5px;
+}
+
+.logo span{
+    color:#ffd400;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.nav-right a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:700;
+}
+
+.nav-right a:hover{
+    color:#ffd400;
+}
+
+.wa-top{
+    background:#25d366;
+    padding:11px 17px;
+    border-radius:30px;
+}
+
+/* ===== HERO ===== */
+
+.hero{
+    min-height:100vh;
+    padding:150px 20px 80px;
+    display:flex;
+    align-items:center;
+
+    background:
+    radial-gradient(
+        circle at 80% 35%,
+        rgba(255,212,0,.14),
+        transparent 35%
+    );
+}
+
+.hero-inner{
+    width:92%;
+    max-width:1200px;
+    margin:auto;
+}
+
+.hero-small{
+    color:#ffd400;
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:2px;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    max-width:850px;
+    font-size:clamp(50px,8vw,95px);
+    line-height:.9;
+    letter-spacing:-6px;
+}
+
+.hero h1 span{
+    color:#ffd400;
+}
+
+.hero-description{
+    max-width:600px;
+    margin-top:30px;
+    color:#999;
+    font-size:18px;
+    line-height:1.7;
+}
+
+.hero-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:30px;
+}
+
+.button{
+    display:inline-block;
+    padding:16px 23px;
+    border-radius:14px;
+    text-decoration:none;
+    font-weight:800;
+}
+
+.button-yellow{
+    background:#ffd400;
+    color:#000;
+}
+
+.button-green{
+    background:#25d366;
+    color:#fff;
+}
+
+.button-dark{
+    background:#171717;
+    color:#fff;
+    border:1px solid #333;
+}
+
+/* ===== MENU ===== */
+
+.menu{
+    width:92%;
+    max-width:1200px;
+    margin:auto;
+    padding:100px 0;
+}
+
+.menu-header{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.menu-header .small{
+    color:#ffd400;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:3px;
+    margin-bottom:12px;
+}
+
+.menu-header h2{
+    font-size:clamp(42px,6vw,65px);
+    letter-spacing:-4px;
+}
+
+.menu-header p{
+    color:#777;
+    margin-top:12px;
+}
+
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.card{
+    display:block;
+    position:relative;
+    overflow:hidden;
+    border-radius:24px;
+    border:1px solid #292929;
+    background:#111;
+    text-decoration:none;
+    color:white;
+    transition:.25s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    border-color:#ffd400;
+}
+
+.card img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    display:block;
+}
+
+.card-content{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:70px 20px 20px;
+    background:linear-gradient(
+        transparent,
+        rgba(0,0,0,.95)
+    );
+}
+
+.card h3{
+    font-size:23px;
+}
+
+.card p{
+    color:#ffd400;
+    font-size:13px;
+    margin-top:7px;
+}
+
+/* ===== CONTACT ===== */
+
+.contacts-section{
+    width:92%;
+    max-width:1200px;
+    margin:auto;
+    padding:30px 0 100px;
+}
+
+.contact-box{
+    background:#111;
+    border:1px solid #292929;
+    border-radius:30px;
+    padding:45px;
+}
+
+.contact-box h2{
+    font-size:48px;
+    letter-spacing:-3px;
+}
+
+.contact-box h2 span{
+    color:#ffd400;
+}
+
+.contact-box p{
+    color:#888;
+    margin:15px 0 30px;
+}
+
+.contact-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.contact-button{
+    display:inline-block;
+    padding:16px 20px;
+    border-radius:14px;
+    text-decoration:none;
+    font-weight:800;
+}
+
+.contact-whatsapp{
+    background:#25d366;
+    color:#fff;
+}
+
+.contact-2gis{
+    background:#ffd400;
+    color:#000;
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+    border-top:1px solid #222;
+    background:#050505;
+    text-align:center;
+    padding:45px 20px 30px;
+}
+
+.footer-logo{
+    font-size:35px;
+    font-weight:900;
+    letter-spacing:-4px;
+    margin-bottom:15px;
+}
+
+.footer-logo span{
+    color:#ffd400;
+}
+
+.footer-text{
+    color:#666;
+    font-size:13px;
+    line-height:1.8;
+}
+
+.footer-text a{
+    color:#ffd400;
+    text-decoration:none;
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:800px){
+
+    .nav{
+        height:65px;
+    }
+
+    .logo{
+        font-size:33px;
+    }
+
+    .nav-right{
+        gap:7px;
+    }
+
+    .nav-right a:not(.wa-top){
+        display:none;
+    }
+
+    .wa-top{
+        font-size:12px;
+        padding:10px 13px;
+    }
+
+    .hero{
+        min-height:650px;
+        padding-top:120px;
+    }
+
+    .hero h1{
+        font-size:53px;
+        letter-spacing:-4px;
+    }
+
+    .hero-description{
+        font-size:16px;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+    }
+
+    .button{
+        width:100%;
+        text-align:center;
+    }
+
+    .menu{
+        padding:70px 0;
+    }
+
+    .menu-grid{
+        grid-template-columns:1fr;
+        gap:15px;
+    }
+
+    .card{
+        border-radius:20px;
+    }
+
+    .contacts-section{
+        padding-bottom:70px;
+    }
+
+    .contact-box{
+        padding:30px 20px;
+        border-radius:22px;
+    }
+
+    .contact-box h2{
+        font-size:38px;
+    }
+
+    .contact-buttons{
+        flex-direction:column;
+    }
+
+    .contact-button{
+        text-align:center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================================================= -->
+<!-- LANGUAGE -->
+<!-- ================================================= -->
+
+<div class="language" id="language">
+
+    <div class="language-box">
+
+        <div class="language-logo">
+            <span class="yellow">M</span>go
+        </div>
+
+        <h1 id="languageTitle">
+            Выберите язык
+        </h1>
+
+        <p id="languageSubtitle">
+            Тілді таңдаңыз
+        </p>
+
+        <div class="language-buttons">
+
+            <button onclick="setLanguage('ru')">
+                🇷🇺 Русский
+            </button>
+
+            <button onclick="setLanguage('kz')">
+                🇰🇿 Қазақша
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- SITE -->
+<!-- ================================================= -->
+
+<div id="site">
+
+
+<header>
+
+    <div class="nav">
+
+        <a href="#" class="logo">
+            <span>M</span>go
+        </a>
+
+        <div class="nav-right">
+
+            <a href="#menu" id="navMenu">
+                Меню
+            </a>
+
+            <a href="#contacts" id="navContacts">
+                Контакты
+            </a>
+
+            <a
+                href="https://wa.me/77072449090"
+                target="_blank"
+                class="wa-top"
+            >
+                WhatsApp
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ================================================= -->
+<!-- HERO -->
+<!-- ================================================= -->
+
+<section class="hero">
+
+    <div class="hero-inner">
+
+        <div class="hero-small">
+            MGO • ALMATY • 11:00 — 23:00
+        </div>
+
+        <h1 id="heroTitle">
+            Еда,<br>
+            к которой<br>
+            <span>хочется вернуться.</span>
+        </h1>
+
+        <p class="hero-description" id="heroDescription">
+            Бургеры, донер, пицца, роллы и сеты.
+            Выбирай любимое — остальное мы сделаем сами.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a
+                href="#menu"
+                class="button button-yellow"
+                id="menuButton"
+            >
+                Открыть меню
+            </a>
+
+            <a
+                href="https://wa.me/77072449090"
+                target="_blank"
+                class="button button-green"
+            >
+                WhatsApp
+            </a>
+
+            <a
+                href="https://2gis.kz/almaty/geo/70000001065723823"
+                target="_blank"
+                class="button button-dark"
+                id="mapButton"
+            >
+                Мы на 2GIS
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- MENU -->
+<!-- ================================================= -->
+
+<section class="menu" id="menu">
+
+    <div class="menu-header">
+
+        <div class="small">
+            MGO MENU
+        </div>
+
+        <h2 id="menuTitle">
+            Выбирай своё
+        </h2>
+
+        <p id="menuSubtitle">
+            Нажми на категорию, чтобы открыть меню
+        </p>
+
+    </div>
+
+
+    <div class="menu-grid">
+
+
+        <!-- 1 -->
+
+        <a
+            class="card"
+            href="https://i.ibb.co/rRWN59kL/IMG-20260820-203700.jpg"
+            target="_blank"
+        >
+
+            <img
+                src="https://i.ibb.co/rRWN59kL/IMG-20260820-203700.jpg"
+                alt="Роллы"
+            >
+
+            <div class="card-content">
+
+                <h3 id="rolls">
+                    🍣 Роллы
+                </h3>
+
+                <p id="open1">
+                    Открыть меню →
+                </p>
+
+            </div>
+
+        </a>
+
+
+        <!-- 2 -->
+
+        <a
+            class="card"
+            href="https://i.ibb.co/R4Sg9L7D/IMG-20260820-203033.jpg"
+            target="_blank"
+        >
+
+            <img
+                src="https://i.ibb.co/R4Sg9L7D/IMG-20260820-203033.jpg"
+                alt="Пицца"
+            >
+
+            <div class="card-content">
+
+                <h3 id="pizza">
+                    🍕 Пицца
+                </h3>
+
+                <p id="open2">
+                    Открыть меню →
+                </p>
+
+            </div>
+
+        </a>
+
+
+        <!-- 3 -->
+
+        <a
+            class="card"
+            href="https://i.ibb.co/7N1WMQ8g/IMG-20260820-202830.jpg"
+            target="_blank"
+        >
+
+            <img
+                src="https://i.ibb.co/7N1WMQ8g/IMG-20260820-202830.jpg"
+                alt="Донер"
+            >
+
+            <div class="card-content">
+
+                <h3 id="doner">
+                    🌯 Донер / Закуски / Комбо
+                </h3>
+
+                <p id="open3">
+                    Открыть меню →
+                </p>
+
+            </div>
+
+        </a>
+
+
+        <!-- 4 -->
+
+        <a
+            class="card"
+            href="https://i.ibb.co/8D7BSmYV/IMG-20260820-202808.jpg"
+            target="_blank"
+        >
+
+            <img
+                src="https://i.ibb.co/8D7BSmYV/IMG-20260820-202808.jpg"
+                alt="Крылышки и бургеры"
+            >
+
+            <div class="card-content">
+
+                <h3 id="burgers">
+                    🍔 Крылышки / Бургеры
+                </h3>
+
+                <p id="open4">
+                    Открыть меню →
+                </p>
+
+            </div>
+
+        </a>
+
+
+        <!-- 5 -->
+
+        <a
+            class="card"
+            href="https://i.ibb.co/5XhddD0D/IMG-20260820-203346.jpg"
+            target="_blank"
+        >
+
+            <img
+                src="https://i.ibb.co/5XhddD0D/IMG-20260820-203346.jpg"
+                alt="Сеты"
+            >
+
+            <div class="card-content">
+
+                <h3 id="sets">
+                    🍱 Сеты
+                </h3>
+
+                <p id="open5">
+                    Открыть меню →
+                </p>
+
+            </div>
+
+        </a>
+
+
+        <!-- 6 -->
+
+        <a
+            class="card"
+            href="https://i.ibb.co/wZ5Yx3DK/IMG-20260820-202953.jpg"
+            target="_blank"
+        >
+
+            <img
+                src="https://i.ibb.co/wZ5Yx3DK/IMG-20260820-202953.jpg"
+                alt="Сеты 2"
+            >
+
+            <div class="card-content">
+
+                <h3 id="sets2">
+                    🔥 Большие сеты
+                </h3>
+
+                <p id="open6">
+                    Открыть меню →
+                </p>
+
+            </div>
+
+        </a>
+
+
+        <!-- 7 -->
+
+        <a
+            class="card"
+            href="https://i.ibb.co/Y7ctNmZy/IMG-20260820-203317.jpg"
+            target="_blank"
+        >
+
+            <img
+                src="https://i.ibb.co/Y7ctNmZy/IMG-20260820-203317.jpg"
+                alt="Хот дог суши и суши бургер"
+            >
+
+            <div class="card-content">
+
+                <h3 id="sushiBurger">
+                    🌭 Хот-дог суши / Суши-бургер
+                </h3>
+
+                <p id="open7">
+                    Открыть меню →
+                </p>
+
+            </div>
+
+        </a>
+
+
+    </div>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- CONTACT -->
+<!-- ================================================= -->
+
+<section class="contacts-section" id="contacts">
+
+    <div class="contact-box">
+
+        <h2 id="contactTitle">
+            Заказывай.<br>
+            <span>Приезжай.</span>
+        </h2>
+
+        <p id="contactText">
+            Алматы · Каждый день · 11:00 — 23:00
+        </p>
+
+        <div class="contact-buttons">
+
+            <a
+                href="https://wa.me/77072449090"
+                target="_blank"
+                class="contact-button contact-whatsapp"
+            >
+                🟢 WhatsApp: 8 707 244 90 90
+            </a>
+
+            <a
+                href="https://2gis.kz/almaty/geo/70000001065723823"
+                target="_blank"
+                class="contact-button contact-2gis"
+                id="contact2gis"
+            >
+                📍 Открыть Mgo в 2GIS
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- FOOTER -->
+<!-- ================================================= -->
+
+<footer>
+
+    <div class="footer-logo">
+        <span>M</span>go
+    </div>
+
+    <div class="footer-text">
+
+        <div>
+            © 2026 Mgo Almaty
+        </div>
+
+        <br>
+
+        <div id="supportTitle">
+            Техническая поддержка сайта
+        </div>
+
+        <a href="tel:+77003220810">
+            +7 700 322 0810
+        </a>
+
+        <br><br>
+
+        <a
+            href="https://www.instagram.com/ametzh.developer/"
+            target="_blank"
+        >
+            Instagram разработчика
+        </a>
+
+    </div>
+
+</footer>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- LANGUAGE SCRIPT -->
+<!-- ================================================= -->
+
+<script>
+
+function setLanguage(language){
+
+    document.getElementById("language").style.display = "none";
+    document.getElementById("site").style.display = "block";
+
+    if(language === "kz"){
+
+        document.documentElement.lang = "kk";
+
+        document.getElementById("navMenu").innerHTML = "Мәзір";
+        document.getElementById("navContacts").innerHTML = "Байланыс";
+
+        document.getElementById("heroTitle").innerHTML =
+            "Қайта<br>оралып<br><span>жегің келетін тағам.</span>";
+
+        document.getElementById("heroDescription").innerHTML =
+            "Бургерлер, донер, пицца, роллдар және сеттер. " +
+            "Өзіңізге ұнағанын таңдаңыз — қалғанын біз жасаймыз.";
+
+        document.getElementById("menuButton").innerHTML =
+            "Мәзірді ашу";
+
+        document.getElementById("mapButton").innerHTML =
+            "Біз 2GIS-теміз";
+
+        document.getElementById("menuTitle").innerHTML =
+            "Өзіңе ұнағанын таңда";
+
+        document.getElementById("menuSubtitle").innerHTML =
+            "Мәзірді көру үшін санатты басыңыз";
+
+        document.getElementById("rolls").innerHTML =
+            "🍣 Роллдар";
+
+        document.getElementById("pizza").innerHTML =
+            "🍕 Пицца";
+
+        document.getElementById("doner").innerHTML =
+            "🌯 Донер / Тіскебасар / Комбо";
+
+        document.getElementById("burgers").innerHTML =
+            "🍔 Қанатшалар / Бургерлер";
+
+        document.getElementById("sets").innerHTML =
+            "🍱 Сеттер";
+
+        document.getElementById("sets2").innerHTML =
+            "🔥 Үлкен сеттер";
+
+        document.getElementById("sushiBurger").innerHTML =
+            "🌭 Хот-дог суши / Суши-бургер";
+
+        document.getElementById("open1").innerHTML =
+            "Мәзірді ашу →";
+
+        document.getElementById("open2").innerHTML =
+            "Мәзірді ашу →";
+
+        document.getElementById("open3").innerHTML =
+            "Мәзірді ашу →";
+
+        document.getElementById("open4").innerHTML =
+            "Мәзірді ашу →";
+
+        document.getElementById("open5").innerHTML =
+            "Мәзірді ашу →";
+
+        document.getElementById("open6").innerHTML =
+            "Мәзірді ашу →";
+
+        document.getElementById("open7").innerHTML =
+            "Мәзірді ашу →";
+
+        document.getElementById("contactTitle").innerHTML =
+            "Тапсырыс бер.<br><span>Бізге кел.</span>";
+
+        document.getElementById("contactText").innerHTML =
+            "Алматы · Күн сайын · 11:00 — 23:00";
+
+        document.getElementById("contact2gis").innerHTML =
+            "📍 Mgo-ны 2GIS-тен ашу";
+
+        document.getElementById("supportTitle").innerHTML =
+            "Сайттың техникалық қолдауы";
+
+    }
+
+    else{
+
+        document.documentElement.lang = "ru";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
